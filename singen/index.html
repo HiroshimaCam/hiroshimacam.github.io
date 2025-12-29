@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>震源マップ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <style>
+        body {
+            color: #000;
+            background: #fff;
+            font-size: 16px;
+        }
+
+        #map {
+            width: 600px;
+            height: 500px;
+            background: #ccc;
+        }
+
+        #list {
+            position: fixed;
+            width: 400px;
+            height: 500px;
+            overflow: auto;
+            border: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <div id="map"></div>
+    <p>開始日時を入力(YYYY/MM/DD hh:mm:ss形式)</p>
+    <input type="text" id="time">
+    <label for="time" id="timelb"></label>
+    <button id="start">開始</button>
+    <button id="stop">終了</button>
+    <span id="list"></span>
+    <script>
+        (async function () {
+            //マップ表示
+            let year;
+            let month;
+            let date;
+            let hour;
+            let min;
+            let sec;
+            let starttime;
+            let startmmtime;
+            let nowtime;
+            let updatefct;
+            let quakemmtime = 0;
+            const map = L.map('map').setView([38.681435, 137.906418], 5);
+            L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+                {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                }).addTo(map);
+            //地震情報取得&&初期値指定
+            const res = await fetch('https://www.jma.go.jp/bosai/quake/data/list.json');
+            const data = await res.json();
+            let max = data.length - 1;
+            const dftime = data[max].eid;
+            year = dftime.substr(0, 4);
+            month = dftime.substr(4, 2);
+            date = dftime.substr(6, 2);
+            hour = dftime.substr(8, 2);
+            min = dftime.substr(10, 2);
+            sec = dftime.substr(12, 2);
+            starttime = `${year}/${month}/${date} ${hour}:${min}:${sec}`;
+            document.getElementById('time').value = starttime;
+            //nowtime = new Date(`${year}-${month}-${date}T${hour}:${min}:${sec}`).getTime();
+            //開始判定
+            document.getElementById('start').addEventListener('click', function () {
+                startmmtime = new Date().getTime();
+                nowtime = document.getElementById('time').value;
+                nowtime = nowtime.replaceAll('/', '-').replaceAll(' ', 'T');
+                console.log(new Date(nowtime));
+                nowtime = new Date(nowtime).getTime();
+                console.log(('00' + new Date(nowtime).getMonth() + 1).slice(-2));
+                quakemmtime = new Date(`${year}-${month}-${date}T${hour}:${min}:${sec}`).getTime();
+                while (quakemmtime < nowtime) {
+                    const quaketime = data[max].eid;
+                    year = quaketime.substr(0, 4);
+                    month = quaketime.substr(4, 2);
+                    date = quaketime.substr(6, 2);
+                    hour = quaketime.substr(8, 2);
+                    min = quaketime.substr(10, 2);
+                    sec = quaketime.substr(12, 2);
+                    quakemmtime = new Date(`${year}-${month}-${date}T${hour}:${min}:${sec}`).getTime();
+                    max--;
+                }
+                updatefct = setInterval(update, 50);
+            })
+            //終了判定
+            document.getElementById('stop').addEventListener('click', function() {
+                clearInterval(updatefct);
+            })
+            //地震情報読み取り&&ピン表示
+            function update() {
+                nowtime += 600000;
+                if (nowtime > startmmtime) {
+                    clearInterval(updatefct);
+                }
+                const nowdate = new Date(nowtime);
+                year = nowdate.getFullYear();
+                month = ('00' + (nowdate.getMonth() + 1)).slice(-2);
+                date = ('00' + nowdate.getDate()).slice(-2);
+                hour = ('00' + nowdate.getHours()).slice(-2);
+                min = ('00' + nowdate.getMinutes()).slice(-2);
+                sec = ('00' + nowdate.getSeconds()).slice(-2);
+                document.getElementById('time').value = `${year}/${month}/${date} ${hour}:${min}:${sec}`;
+                const quaketime = data[max].eid;
+                year = quaketime.substr(0, 4);
+                month = quaketime.substr(4, 2);
+                date = quaketime.substr(6, 2);
+                hour = quaketime.substr(8, 2);
+                min = quaketime.substr(10, 2);
+                sec = quaketime.substr(12, 2);
+                quakemmtime = new Date(`${year}-${month}-${date}T${hour}:${min}:${sec}`).getTime();
+                if (quakemmtime < nowtime) {
+                    if (data[max].ttl == "震源・震度情報") {
+                        const cod = data[max].cod;
+                        const lat = cod.substr(1, 4);
+                        const lon = cod.substr(6, 5);
+                        const anm = data[max].anm;
+                        const maxi = data[max].maxi;
+                        const mag = data[max].mag;
+                        const icon = L.icon({
+                            iconUrl: 'image/marker-small.png',
+                            iconSize: [16, 27],
+                            iconAnchor: [8, 27],
+                        });
+                        const mark = L.marker([Number(lat), Number(lon)], { icon: icon }).addTo(map);
+                        setTimeout(function() {
+                            map.removeLayer(mark)
+                        }, 5000);
+                        let text = document.getElementById('list').innerHTML;
+                        document.getElementById('list').innerHTML = `${year}/${month}/${date} ${hour}:${min}:${sec}<br>${anm} M${mag}<br>最大震度${maxi}<br>` + text + "<br>";
+                    }
+                    max--;
+                }
+            }
+            //console.log(new Date('2025-12-16T20:51:00').getTime())
+        })();
+    </script>
+</body>
+
+</html>
