@@ -26,6 +26,13 @@
             overflow: auto;
             border: #000;
         }
+        
+      　@media screen and (max-width: 768px) {
+         #map {
+             width: 100%;
+             height: 80%;
+         }
+        }
     </style>
 </head>
 
@@ -52,6 +59,8 @@
             let nowtime;
             let updatefct;
             let quakemmtime = 0;
+            const audio1 = new Audio();
+            audio1.src = "sound/sound.mp3";
             const map = L.map('map').setView([38.681435, 137.906418], 5);
             L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
                 {
@@ -122,6 +131,8 @@
                 quakemmtime = new Date(`${year}-${month}-${date}T${hour}:${min}:${sec}`).getTime();
                 if (quakemmtime < nowtime) {
                     if (data[max].ttl == "震源・震度情報") {
+                        audio1.pause();
+                        audio1.currentTime = 0;
                         const cod = data[max].cod;
                         const lat = cod.substr(1, 4);
                         const lon = cod.substr(6, 5);
@@ -133,14 +144,16 @@
                             iconSize: [16, 27],
                             iconAnchor: [8, 27],
                         });
-                        const mark = L.marker([Number(lat), Number(lon)], { icon: icon }).addTo(map);
-                        setTimeout(function() {
-                            map.removeLayer(mark)
-                        }, 5000);
+                        L.marker([Number(lat), Number(lon)], { icon: icon }).addTo(map);
                         let text = document.getElementById('list').innerHTML;
                         document.getElementById('list').innerHTML = `${year}/${month}/${date} ${hour}:${min}:${sec}<br>${anm} M${mag}<br>最大震度${maxi}<br>` + text + "<br>";
+                        audio1.volume = Number(mag) / 8;
+                        audio1.play();
                     }
                     max--;
+                    if (max == -1) {
+                        clearInterval(updatefct);
+                    }
                 }
             }
             //console.log(new Date('2025-12-16T20:51:00').getTime())
