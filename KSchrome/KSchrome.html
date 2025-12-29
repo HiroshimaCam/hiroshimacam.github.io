@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            text-align: center;
+            font-size: 20px;
+            font-family: sans-serif;
+            color: #000;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .head {
+            background: linear-gradient(to bottom right, #ccc, #fff);
+        }
+
+        #title {
+            display: grid;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head">
+        <span style="font-size: 30px;">KSchrome</span>
+        <span id="title">Chrome拡張用強震モニタ</span>
+    </div>
+    <img src="images/img1.gif" width="300">
+    <br><br>
+    <div class="menus"  style="display: inline-block; text-align: left; background: #bbb; font-size: 15px;">
+        <div class="function">
+            <p>機能</p>
+            <ul>
+                <li>緊急地震速報表示<br>　Wolfx APIから受信した緊急地震速報を表示します。</li>
+                <li>強震モニタ表示<br>　強震モニタ(防災科学技術研究所様)から取得した強震・予測円画像を表示します。</li>
+                <li>揺れ指数表示<br>　強震モニタの最大加速度から得られた観測点ごとの色を赤・黄・緑・青に分け、青を除いた観測点の個数を波形で表示します。<br>　通常時は青色ですが、地震が発生するとグラフの横幅が広がり、色が変化します。</li>
+                <li>地震情報表示<br>　Yahoo地震情報から取得した地震情報(直近4件)を表示します。更新されたときにサウンド＋音声読み上げも可能です。</li>
+            </ul>
+        </div>
+        <br>
+        <div class="download">
+            <p>ダウンロード</p>
+          　<span>2025/12/12 </span>
+            <a href="downloadfiles/KSchrome-0.2.0.zip">ver0.2.0</a>
+            <ul>
+              <li>PLUM法に対応しました。（表示をM1.0表記から"PLUM法による仮定震源要素"に変更）</li>
+              <li>緊急地震速報の第一報と最終報にそれぞれ違う音声が鳴るようにしました。</li>
+              <li>揺れグラフの色を揺れがわかりやすいように変更しました。</li>
+            </ul>
+            <span>2025/12/07 </span>
+            <a href="downloadfiles/KSchrome-0.1.2.zip">ver0.1.2</a>
+            <ul>
+              <li>遠地地震が地震履歴にある際にリスト全体が正しく表示されなくなる問題を修正しました。</li>
+            </ul>
+            <span>2025/12/05 </span>
+            <a href="downloadfiles/KSchrome-0.1.1.zip">ver0.1.1</a>
+            <ul>
+              <li>コードの一部を修正。</li>
+              <li>強震モニタの画像を取得するときの遅延時間を短くしました。</li>
+            </ul>
+            <span>2025/11/27 </span>
+            <a href="downloadfiles/KSchrome-0.1.0.zip">ver0.1.0</a>
+        </div>
+    </div>
+</body>
+
+</html>
