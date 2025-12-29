@@ -1,0 +1,129 @@
+@font-face {
+    font-family: dseg7;
+    src: url('../font/DSEG7Classic-BoldItalic.woff');
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    color: #fff;
+    background: #000;
+    font-size: 24px;
+    font-family: Helvetica Neue, Arial, Helvetica, sans-serif;;
+}
+
+.mainwin {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#map {
+    z-index: 0;
+    position: absolute;
+    border-radius: 4px;
+    background: #333;
+    width: 100%;
+    height: 100%;
+}
+
+#info {
+    z-index: 10;
+    position: fixed;
+    width: 30%;
+    height: 20%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 1.3vw;
+}
+
+#meter {
+    position: flex;
+}
+
+#total {
+    font-size: 1vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#max {
+    font-size: 1vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#time {
+    font-family: dseg7;
+    text-align: center;
+}
+
+#setimg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5%;
+}
+
+#setting {
+    z-index: 20;
+    position: absolute;
+    width: 10%;
+    display: none;
+    height: 100%;
+    background: #555;
+    right: 0;
+    font-size: 1vw;
+}
+
+@media screen and (max-width: 768px) {
+    #info {
+        z-index: 10;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #555;
+        color: #fff;
+        opacity: 0.7;
+        font-size: 14px;
+    }
+
+    #time {
+        bottom: 0;
+        position: absolute;
+    }
+
+    #setimg {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+    }
+
+    #setting {
+        z-index: 20;
+        width: 75%;
+        height: 100%;
+        font-size: 14px;
+    }
+}
