@@ -76,7 +76,7 @@ map.on('load', () => {
             }
         })
         let dis = distance(latitude, lastlat, longitude, lastlon);
-        total = dis;
+        total += dis;
         total = total.toFixed(2);
         dis = (3600 * 1000 / interval) * dis;
         dis = Math.round(dis);
@@ -109,5 +109,6 @@ map.on('load', () => {
     const watchid = navigator.geolocation.watchPosition(onsuccess, onerror, option);
 
 });
+
 
 
