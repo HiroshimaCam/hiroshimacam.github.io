@@ -92,8 +92,8 @@ body {
 }
 
 #opensetting, #rainmap {
+    height: 30px;
     border: 1px solid #fff;
-    aspect-ratio: 1 / 1;
 }
 
 #setimg, #rainimg {
@@ -140,10 +140,6 @@ body {
     
     #max {
         font-size: 14px;
-    }
-
-    #menubox {
-        width: 40px;
     }
 
     #setting {
