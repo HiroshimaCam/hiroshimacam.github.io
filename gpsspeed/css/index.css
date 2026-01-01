@@ -91,12 +91,12 @@ body {
     background: #aaa;
 }
 
-#opensetting, #rainmap {
-    height: 30px;
+#opensetting, #rainmap, #copy {
+    height: 28px;
     border: 1px solid #fff;
 }
 
-#setimg, #rainimg {
+#setimg, #rainimg, #copyimg {
     width: 100%;
 }
 
