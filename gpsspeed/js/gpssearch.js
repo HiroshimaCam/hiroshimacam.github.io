@@ -7,6 +7,7 @@ let interval = 0;
 let lasttime = 0;
 let total = 0;
 let max = 0;
+let isfirst = true;
 const R = Math.PI / 180;
 function distance(lt1, lt2, ln1, ln2) {
     lt1 *= R;
@@ -68,6 +69,7 @@ map.on('load', () => {
             map.setCenter([longitude, latitude]);
         }
         latlons.push([longitude, latitude]);
+        if (latlons.length > 5000) latlons.shift();
         map.getSource('route').setData({
             'type': 'Feature',
             'geometry': {
@@ -82,6 +84,11 @@ map.on('load', () => {
         if (max < dis) {
             max = dis;
         }
+        if (isfirst) {
+            dis = 0;
+            console.log('初回の計算はスルー');
+        }
+        isfirst = false;
         const time = new Date(nowtime);
         const year = time.getFullYear();
         const month = ('00' + (time.getMonth() + 1)).slice(-2);
