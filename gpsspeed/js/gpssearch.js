@@ -7,6 +7,8 @@ let interval = 0;
 let lasttime = 0;
 let total = 0;
 let max = 0;
+let latitude;
+let longitude;
 let isfirst = true;
 const R = Math.PI / 180;
 function distance(lt1, lt2, ln1, ln2) {
@@ -56,8 +58,8 @@ map.on('load', () => {
     });
     const onsuccess = (loc) => {
         const accuracy = loc.coords.accuracy;
-        const latitude = loc.coords.latitude;
-        const longitude = loc.coords.longitude;
+        latitude = loc.coords.latitude;
+        longitude = loc.coords.longitude;
         const nowtime = loc.timestamp;
         interval = (nowtime - lasttime);
         if (lastlat == null && lastlon == null) {
@@ -114,3 +116,6 @@ map.on('load', () => {
     }
     const watchid = navigator.geolocation.watchPosition(onsuccess, onerror, option);
 });
+document.getElementById('copy').addEventListener('click', function() {
+    navigator.clipboard.writeText(latitude + ", " + longitude);
+})
