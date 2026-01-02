@@ -80,7 +80,9 @@ map.on('load', () => {
             }
         })
         let dis = distance(latitude, lastlat, longitude, lastlon);
-        total += dis;
+        if (!Number.isNaN(dis)) {
+            total += dis;
+        }
         dis = (3600 * 1000 / interval) * dis;
         dis = Math.round(dis);
         if (max < dis) {
@@ -118,4 +120,5 @@ map.on('load', () => {
 });
 document.getElementById('copy').addEventListener('click', function() {
     navigator.clipboard.writeText(latitude + ", " + longitude);
+
 })
