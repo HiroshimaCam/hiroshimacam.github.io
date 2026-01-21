@@ -62,10 +62,6 @@ body {
             border-top: 1px solid white;
         }
 
-        #topimg {
-            width: 800px;
-        }
-
         @media (max-width: 768px) {
             ul.menu li {
                 width: 100%;
@@ -80,7 +76,7 @@ body {
             }
 
             ul.menu a {
-                width: 100%;
+                width: 50%;
                 background: linear-gradient(to bottom, #d898ca, #bb659e 49%, #af478c 50%, #881b77);
                 color: white;
                 line-height: 40px;
@@ -88,9 +84,5 @@ body {
                 text-decoration: none;
                 font-weight: bold;
                 display: block;
-            }
-
-            #topimg {
-                width: 100%;
             }
         }
