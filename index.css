@@ -21,6 +21,7 @@ p {
 }
 
 ul.menu {
+    position: relative;
     margin: 0px;
     padding: 0px 0px 0px 15px;
     background: linear-gradient(to bottom, #778098, #3a486b 49%, #24335a 50%, #1a2644);
