@@ -6,7 +6,6 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    font-size: 1rem;
 }
 
 p {
@@ -22,6 +21,7 @@ p {
 }
 
 ul.menu {
+    font-size: 1rem;
     margin: 0px;
     padding: 0px 0px 0px 15px;
     background: linear-gradient(to bottom, #778098, #3a486b 49%, #24335a 50%, #1a2644);
