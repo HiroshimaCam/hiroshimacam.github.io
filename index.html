@@ -20,7 +20,9 @@
         </li>
         <li><a href="#">webアプリ</a>
             <ul>
-                <li><a href="#" onclick="window.open('realtime-earthquake-monitor/', 'popup', 'width=359,height=514'); return false;">本家GAE版風モニタ</a></li>
+                <li><a href="#"
+                        onclick="window.open('realtime-earthquake-monitor/', 'popup', 'width=359,height=514'); return false;">本家GAE版風モニタ</a>
+                </li>
                 <li><a href="singen/" target="_blank">震源推移マップ</a></li>
                 <li><a href="gpsspeed/" target="_blank">GPS速度計</a></li>
             </ul>
@@ -28,8 +30,16 @@
     </ul>
     <p>広島市で地震観測をしています。</p>
     <p><img src="image1.png" width="300" style="right: 0; display: block; position: absolute;"></p>
-    <p style='color: red; font-weight: 600;'>現在の揺れ（強震モニタ）</p>
-    <iframe src="https://hiroshimacam.github.io/realtime-earthquake-monitor/" width="359" height="514"></iframe>
+    <div class="contents" style="display: flex;">
+        <div class="kyoshin" style="width: fit-content">
+            <p style='color: red; font-weight: 600;'>現在の揺れ（強震モニタ）</p>
+            <iframe width="359" height="514"></iframe>
+        </div>
+        <div class="eqinfo" style="width: fit-content">
+            <p style='color: red; font-weight: 600;'>地震情報</p>
+            <span id="eqinfotable"></span>
+        </div>
+    </div>
     <a href="quakeMonitoring/" target="_blank">地震観測まとめ</a>
     <script src="index.js"></script>
 </body>
