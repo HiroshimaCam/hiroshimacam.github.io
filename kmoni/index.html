@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>強震モニタ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        (function () {
+            if (typeof globalThis === 'object') return;
+            try {
+                Object.defineProperty(Object.prototype, '__magic__', {
+                    get: function () { return this; },
+                    configurable: true
+                });
+                __magic__.globalThis = __magic__;
+                delete Object.prototype.__magic__;
+            } catch (e) {
+                if (typeof window !== 'undefined') window.globalThis = window;
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <div id="map">
+        <img src="base_map.png">
+        <img id="map1_honshu" width="341" height="387">
+        <span id="pga_telop">地表加速度</span>
+        <img id="map1_time" width="352" height="400">
+        <img id="map2_kita" width="282" height="320">
+        <img id="map2_minami" width="282" height="320">
+        <img id="map2_okinawa" width="282" height="320">
+        <img id="map2_time" width="352" height="400">
+        <span id="int_telop">地表震度</span>
+        <img id="shihyo" src="nied_scale.png" width="70">
+
+        <div id="menu_replay">
+            <p id="replayTime">最新</p>
+            <button id="d1min">-1m</button>
+            <button id="d1sec">-1s</button>
+            <button id="i1sec">+1s</button>
+            <button id="i1min">+1m</button>
+        </div>
+    </div>
+    <bst-widget data-handle="zishin3255.bsky.social" data-theme="dark" data-width="401px" data-height="479px"
+        data-lang="ja" data-ui="1" data-pin="0" data-rp="0" data-thread="0" data-prof="2"></bst-widget>
+    <script src="https://blueskytimeline.com/v2/timeline.js" type="module" defer></script>
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

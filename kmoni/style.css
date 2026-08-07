@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #eee;
+    background: #000;
+    font-family: "ＭＳ Ｐゴシック", "Osaka", Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+}
+
+button {
+    font-family: "ＭＳ Ｐゴシック", "Osaka", Arial, sans-serif;
+    border-radius: 3px;
+    height: 25px;
+    cursor: pointer;
+    color: #777;
+    text-shadow: 1px 1px #fff;
+    background-color: #eee;
+    background-image: linear-gradient(to bottom, hsl(0,0%,98%) 0%,hsl(0,0%,77%) 100%);
+    border-color: #FFF rgba(255, 255, 255, 0.33) rgba(255, 255, 255, 0.33);
+}
+
+button:hover {
+    border: 1px solid #000;
+}
+
+#map {
+    position: relative;
+    width: 401px;
+    height: 479px;
+}
+
+#map img {
+    position: absolute;
+}
+
+#map1_honshu {
+    left: -2px;
+    top: -6px;
+}
+
+#map1_time {
+    left: 0px;
+    top: -23px;
+    clip: rect(22px, 206px, 36px, 0px);
+    background: #fff;
+}
+
+#map2_kita, #map2_minami {
+    left: 112px;
+    top: 126px;
+}
+
+#map2_kita {
+    clip: rect(0px, 282px, 140px, 170px);
+}
+
+#map2_minami {
+    clip: rect(140px, 282px, 320px, 0px);
+}
+
+#map2_okinawa {
+    left: 188px;
+    top: 312px;
+    clip: rect(30px, 132px, 170px, 0px);
+}
+
+#map2_time {
+    left: 0px;
+    top: -8px;
+    clip: rect(22px, 206px, 36px, 0px);
+    background: #fff;
+}
+
+#pga_telop {
+    position: absolute;
+    left: 310px;
+    color: #e0639f;
+}
+
+#int_telop {
+    position: absolute;
+    left: 340px;
+    top: 120px;
+    color: aqua;
+}
+
+#shihyo {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+#menu_replay {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+#replayTime {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#replayTime:hover {
+    background: #333;
+}
